@@ -22,14 +22,11 @@ GitHub Branch: master
 
 // defined Base Dir
 define( 'ETC_BASE_DIR', dirname( __FILE__ ) );
-// defined Base URI
-// define( 'ETC_BASE_URL', plugin_dir_url() );
 
-$file_names = glob( ETC_BASE_DIR . '/inc/class-*.php' );
 
-foreach ( $file_names as $key => $filename) {
-  require_once( $filename ); // require files
-}
+require_once( dirname( __FILE__ ) . '/inc/class-etc-theme-customizer.php' );
+require_once( dirname( __FILE__ ) . '/inc/class-wp-theme-customizer-import-json.php' );
+
 
 // Plugin Loaded File
 add_action( 'plugins_loaded', array( 'ETC_Theme_Customizer', 'get_instance' ) );

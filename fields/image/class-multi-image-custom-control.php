@@ -14,7 +14,7 @@ if ( ! class_exists( 'WP_Customize_Control' ) ){
 	return NULL;
 }
 
-class WP_Multi_Image_Control extends \WP_Customize_Control
+class Multi_Image_Custom_Control extends \WP_Customize_Control
 {
 
 	/**

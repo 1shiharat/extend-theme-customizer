@@ -39,8 +39,37 @@ class ETC_Theme_Customizer
 	{
 
 		// require class file
-		foreach ( glob( ETC_BASE_DIR . '/**/**/class-*.php' ) as $key => $filename) {
-			require_once( $filename );
+		$support_fields = array(
+			'date' => array(
+				'date-picker'
+			),
+			'image' => array(
+				'multi-image'
+			),
+			'layout' => array(
+				'layout-picker'
+      ),
+			'select' => array(
+				'category-dropdown',
+				'google-font-dropdown',
+				'menu-dropdown',
+				'post-dropdown',
+				'post-type-dropdown',
+				'tags-dropdown',
+				'taxonomy-dropdown',
+				'user-dropdown',
+			),
+			'text' => array(
+				'text-editor',
+				'textarea'
+			),
+		);
+		$support_fields = apply_filters( 'etc_support_files', $support_fields );
+
+		foreach ( $support_fields as $dir => $field_slugs ) {
+			foreach ( $field_slugs as $slug ) {
+				require_once ( ETC_BASE_DIR . '/fields/' . $dir . '/' . 'class-' . $slug . '-custom-control.php' );
+			}
 		}
 
 		$this->json_path = $json_path;
@@ -98,20 +127,6 @@ class ETC_Theme_Customizer
 		}
 
 		return $setting_id;
-
-	}
-
-	/**
-	 * customize preview js enqueue
-	 * @return void
-	 */
-	public function customize_preview() {
-
-		// $preview_js_uri = get_template_directory_uri() . '/inc/plugins/theme-customizer/assets/js/customizer-preview.js';
-		/**
-		 * action filter "gc_theme_customizer_preview_js_uri"
-		 */
-		// wp_enqueue_script( 'gc_customize_preview', apply_filters( 'gc_theme_customizer_preview_js_uri', $preview_js_uri ), array( 'customize-preview' ), '3.9', false );
 
 	}
 

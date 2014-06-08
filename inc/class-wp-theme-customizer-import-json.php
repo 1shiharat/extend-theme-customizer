@@ -97,7 +97,7 @@ class WP_Theme_Customizer_Import_Json
 		 * @see wp-includes/class-wp-theme-customizer-manager.php
 		 */
 
-		add_action( 'customize_preview_init', array( $this, 'customize_preview' ) );
+		// add_action( 'customize_preview_init', array( $this, 'customize_preview' ) );
 
 		add_action( 'customize_register', array( $this, 'register_customizer' ), 99, 1 );
 
@@ -392,7 +392,7 @@ class WP_Theme_Customizer_Import_Json
 			case 'image':
 				$this->wp_customize->
 					add_control(
-						new WP_Multi_Image_Control(
+						new Multi_Image_Custom_Control(
 							$this->wp_customize,
 							$setting_name,
 							$this->set_control( $section_name, $setting_name, $settings )
