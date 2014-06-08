@@ -13,7 +13,7 @@ class Layout_Picker_Custom_Control extends WP_Customize_Control
 	public function render_content()
 	{
 
-		$image_directory =  dirname( __FILE__ ) . '/img' ;
+		$image_directory =  ETC_BASE_URL . '/fields/layout/img' ;
 		?>
 		<label>
 			<span class="customize-layout-control"><?php echo esc_html( $this->label ); ?></span>
