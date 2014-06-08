@@ -1,0 +1,446 @@
+{
+	"setting": {
+		"theme_slug": "twentyforteen",
+		"capability": "edit_theme_options"
+	},
+	"sections": {
+		"gg_general_settings": {
+			"title": "基本的な設定",
+			"priority": 10,
+			"setting": {
+				"general_keywords": {
+					"transport": "postMessage",
+					"default": "",
+					"label": "キーワードをカンマ区切りで入力してください。",
+					"type": "option"
+				},
+				"general_analytics_code": {
+					"transport": "postMessage",
+					"default": "",
+					"label": "Google Analytics コードを入力してください",
+					"type": "option"
+				},
+				"general_user_select": {
+					"transport": "postMessage",
+					"default": "",
+					"label": "テキストエディター",
+					"type": "text-editor"
+				}
+			}
+		},
+		"gg_logo_settings": {
+			"title": "ロゴの設定",
+			"priority": 30,
+			"setting": {
+				"logo_choice": {
+					"transport": "refresh",
+					"default": "text",
+					"label": "ロゴの表示方法の選択",
+					"type": "select",
+					"choices": {
+						"text": "テキスト",
+						"image": "画像"
+					}
+				},
+
+				"logo_image_upload": {
+					"transport": "postMessage",
+					"label": "ロゴ画像アップロード",
+					"type": "image"
+				},
+
+				"logo_size": {
+					"transport": "postMessage",
+					"default": "small",
+					"label": "ロゴの大きさ",
+					"type": "radio",
+					"choices": {
+						"small": "小",
+						"normal": "中",
+						"full": "フル"
+					}
+				},
+
+				"logo_align": {
+					"transport": "postMessage",
+					"default": "left",
+					"label": "ロゴの位置",
+					"type": "radio",
+					"choices": {
+						"left": "左",
+						"center": "センター",
+						"right": "右"
+					}
+				},
+				"logo_text_color": {
+					"transport": "postMessage",
+					"default": "#FFF",
+					"label": "テキスト時のロゴカラー",
+					"type": "color"
+				}
+			}
+		},
+		"gg_color_settings": {
+			"title": "カラー設定",
+			"priority": 30,
+			"setting": {
+
+				"themecolor_themecolor": {
+					"transport": "postMessage",
+					"default": "#FFFFFF",
+					"label": "テーマカラー",
+					"type": "color"
+				},
+
+				"themecolor_primary": {
+					"transport": "postMessage",
+					"default": "#FB760D",
+					"label": "プライマリーカラー(ボタン)",
+					"type": "color"
+				},
+
+				"themecolor_secondary": {
+					"transport": "postMessage",
+					"default": "#84909E",
+					"label": "セカンダリーカラー(補助色)",
+					"type": "color"
+				},
+
+				"themecolor_linkcolor": {
+					"transport": "postMessage",
+					"default": "#FB760D",
+					"label": "リンクテキストカラー",
+					"type": "color"
+				},
+
+				"themecolor_linkcolor_hover": {
+					"transport": "postMessage",
+					"default": "#FB760D",
+					"label": "リンクホバーテキストカラー",
+					"type": "color"
+				}
+
+			}
+		},
+
+		"gg_background_settings": {
+			"title": "背景の設定",
+			"priority": 30,
+			"setting": {
+
+				"background_color": {
+					"transport": "postMessage",
+					"default": "#FFF",
+					"label": "背景色の選択",
+					"type": "color"
+				},
+
+				"background_image_upload": {
+					"transport": "postMessage",
+					"label": "背景画像アップロード",
+					"type": "image"
+				},
+
+				"header_background_image_upload": {
+					"transport": "postMessage",
+					"label": "ヘッダー : 背景画像アップロード",
+					"type": "image"
+				}
+			}
+		},
+		"gg_font_settings": {
+			"title": "フォントの設定",
+			"priority": 30,
+			"setting": {
+
+				"font_base_size": {
+					"transport": "postMessage",
+					"default": "14px",
+					"label": "ベースとなるフォントのサイズを選択してください。",
+					"type": "select",
+					"choices": {
+						"10px": "10px",
+						"11px": "11px",
+						"12px": "12px",
+						"13px": "13px",
+						"14px": "14px",
+						"15px": "15px",
+						"16px": "16px",
+						"17px": "17px",
+						"18px": "18px",
+						"19px": "19px",
+						"20px": "20px"
+					}
+				},
+
+				"font_line_height": {
+					"transport": "postMessage",
+					"default": "1.7em",
+					"label": "行間を設定してください。",
+					"type": "select",
+					"choices": {
+						"1.0em": "0",
+						"1.1em": "1",
+						"1.2em": "2",
+						"1.3em": "3",
+						"1.4em": "4",
+						"1.5em": "5",
+						"1.6em": "6",
+						"1.7em": "7",
+						"1.8em": "8",
+						"1.9em": "9",
+						"2.0em": "10"
+					}
+				},
+
+				"font_letter_space": {
+					"transport": "postMessage",
+					"default": "0px",
+					"label": "字間を設定してください。",
+					"type": "select",
+					"choices": {
+						"0px": "0px",
+						"1px": "1px",
+						"2px": "2px",
+						"3px": "3px",
+						"4px": "4px",
+						"5px": "5px",
+						"6px": "6px",
+						"7px": "7px",
+						"8px": "8px",
+						"9px": "9px",
+						"10px": "10px"
+					}
+				},
+				"font_text_color": {
+					"transport": "postMessage",
+					"default": "#252525",
+					"label": "テキストカラー",
+					"type": "color"
+				}
+			}
+		},
+		"gg_layout_settings": {
+			"title": "レイアウトの設定",
+			"priority": 30,
+			"setting": {
+				"layout_top": {
+					"transport": "postMessage",
+					"default": "#FFF",
+					"label": "トップページ・下層ページでそれぞれサイドバーの位置を設定することができます。",
+					"type": "radio",
+					"choices": {
+						"right": "右",
+						"left": "左",
+						"one_column": "ワンカラム"
+					}
+				},
+				"layout_layer": {
+					"transport": "postMessage",
+					"default": "#FFF",
+					"label": "トップページ・下層ページでそれぞれサイドバーの位置を設定することができます。",
+					"type": "radio",
+					"choices": {
+						"right": "右",
+						"left": "左",
+						"one_column": "ワンカラム"
+					}
+				}
+			}
+		},
+		"gg_heading_settings": {
+			"title": "見出しの設定",
+			"priority": 37,
+			"description": "見出しに予め決められたスタイルを適用させることができます。",
+			"setting": {
+				"heading_type_widget_title": {
+					"transport": "postMessage",
+					"default": "type01",
+					"label": "ウィジェットタイトル",
+					"type": "select",
+					"choices": {
+						"type01": "タイプ01",
+						"type02": "タイプ02",
+						"type03": "タイプ03",
+						"type04": "タイプ04",
+						"type05": "タイプ05",
+						"type06": "タイプ06"
+					}
+				},
+				"heading_type_entry_header": {
+					"transport": "postMessage",
+					"default": "type01",
+					"label": "記事タイトル",
+					"type": "select",
+					"choices": {
+						"type01": "タイプ01",
+						"type02": "タイプ02",
+						"type03": "タイプ03",
+						"type04": "タイプ04",
+						"type05": "タイプ05",
+						"type06": "タイプ06"
+					}
+				},
+				"heading_type_h1": {
+					"transport": "postMessage",
+					"default": "type01",
+					"label": "h1(記事内)",
+					"type": "select",
+					"choices": {
+						"type01": "タイプ01",
+						"type02": "タイプ02",
+						"type03": "タイプ03",
+						"type04": "タイプ04",
+						"type05": "タイプ05",
+						"type06": "タイプ06"
+					}
+				},
+				"heading_type_h2": {
+					"transport": "postMessage",
+					"default": "type01",
+					"label": "h2(記事内)",
+					"type": "select",
+					"choices": {
+						"type01": "タイプ01",
+						"type02": "タイプ02",
+						"type03": "タイプ03",
+						"type04": "タイプ04",
+						"type05": "タイプ05",
+						"type06": "タイプ06"
+					}
+				},
+				"heading_type_h3": {
+					"transport": "postMessage",
+					"default": "type01",
+					"label": "h3(記事内)",
+					"type": "select",
+					"choices": {
+						"type01": "タイプ01",
+						"type02": "タイプ02",
+						"type03": "タイプ03",
+						"type04": "タイプ04",
+						"type05": "タイプ05",
+						"type06": "タイプ06"
+					}
+				},
+				"heading_type_h4": {
+					"transport": "postMessage",
+					"default": "type01",
+					"label": "h4(記事内)",
+					"type": "select",
+					"choices": {
+						"type01": "タイプ01",
+						"type02": "タイプ02",
+						"type03": "タイプ03",
+						"type04": "タイプ04",
+						"type05": "タイプ05",
+						"type06": "タイプ06"
+					}
+				},
+				"heading_type_h5": {
+					"transport": "postMessage",
+					"default": "type01",
+					"label": "h5(記事内)",
+					"type": "select",
+					"choices": {
+						"type01": "タイプ01",
+						"type02": "タイプ02",
+						"type03": "タイプ03",
+						"type04": "タイプ04",
+						"type05": "タイプ05",
+						"type06": "タイプ06"
+					}
+				},
+				"heading_type_h6": {
+					"transport": "postMessage",
+					"default": "type01",
+					"label": "h6(記事内)",
+					"type": "select",
+					"choices": {
+						"type01": "タイプ01",
+						"type02": "タイプ02",
+						"type03": "タイプ03",
+						"type04": "タイプ04",
+						"type05": "タイプ05",
+						"type06": "タイプ06"
+					}
+				}
+			}
+		},
+		"gg_comment_settings": {
+			"title": "コメントの設定",
+			"priority": 38,
+			"setting": {
+				"comment_disp": {
+					"transport": "postMessage",
+					"default": "",
+					"label": "固定ページでのコメント表示",
+					"type": "radio",
+					"choices": {
+						"true": "表示する",
+						"false": "表示しない"
+					}
+				},
+				"comment_facebook": {
+					"transport": "postMessage",
+					"default": "",
+					"label": "Facebookコメントを表示しますか？",
+					"type": "radio",
+					"choices": {
+						"true": "表示する",
+						"false": "表示しない"
+					}
+				}
+			}
+		},
+		"gg_footer_settings": {
+			"title": "フッター設定",
+			"priority": 32,
+			"setting": {
+				"footer_copyright": {
+					"transport": "postMessage",
+					"default": "",
+					"label": "コピーライトテキスト",
+					"type": "option"
+				},
+				"footer_pagetop_disp": {
+					"transport": "postMessage",
+					"default": "true",
+					"label": "このページの先頭へボタン表示しますか？",
+					"type": "radio",
+					"choices": {
+						"true": "表示する",
+						"false": "表示しない"
+					}
+				}
+			}
+		},
+		"nav": {
+			"title": "ナビゲーション",
+			"priority": 38,
+			"setting": {
+				"navigation_color": {
+					"transport": "postMessage",
+					"default": "",
+					"label": "コピーライトテキスト",
+					"type": "radio",
+					"choices": {
+						"inverse": "黒",
+						"default": "白",
+						"relative": "テーマカラー"
+					}
+				},
+				"layout_navigation": {
+					"transport": "postMessage",
+					"default": "true",
+					"label": "ナビゲーションの表示",
+					"type": "radio",
+					"choices": {
+						"true": "表示する",
+						"false": "表示しない"
+					}
+				}
+			}
+		}
+	}
+}
