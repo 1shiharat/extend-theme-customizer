@@ -125,6 +125,8 @@ class ETC_Admin {
 		$json_path = get_option( 'etc_json_settings' );
 		$width = get_option( 'etc_width_settings' );
 		$setting_object = WP_Theme_Customizer_Import_Json::get_theme_customizer_object();
+
+		// include /admin/views/admin.php
 		include_once( 'views/admin.php' );
 
 	}
@@ -139,17 +141,18 @@ class ETC_Admin {
 	{
 
 		return array_merge(
-			array(
+			 array(
 				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . __( 'ETC Settings', $this->plugin_slug ) . '</a>'
-			),
-			$links
+			 ),
+			 $links
 		);
 
 	}
 
 	/**
-	 * action method
-	 * @return [type] [description]
+	 * Update Option
+	 *
+	 * @return boolean
 	 */
 	public function etc_admin_update_option()
 	{
@@ -158,7 +161,7 @@ class ETC_Admin {
 		$nonce = $_POST['_wp_nonce'];
 
 		if ( wp_verify_nonce( $nonce , plugin_basename( __file__ ) ) !== 1 ) {
-			return;
+			return false;
 		}
 
 		$json_contents = $json_file_path;
@@ -169,17 +172,17 @@ class ETC_Admin {
 	}
 
 	/**
-	 * action method
-	 * @return [type] [description]
+	 * Add Option
+	 *
+	 * @return boolean
 	 */
 	public function etc_admin_add_option()
 	{
 
-		$success = '';
+		$success = false;
 		$json_path = get_option( 'etc_json_settings', false );
 		$tc_width = get_option( 'etc_width_settings', false );
 		$tc_column = get_option( 'etc_width_settings', false );
-
 		$default = plugin_dir_path( __FILE__ ) . '/json/theme-customizer-setting.json';
 
 		if ( ! $json_path ) {

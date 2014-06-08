@@ -26,14 +26,14 @@ class Category_Dropdown_Custom_Control extends WP_Customize_Control
 	{
 		if ( ! empty( $this->cats ) ) {
 		?>
-  	<label>
+		<label>
 			<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 			<select <?php $this->link(); ?>>
 			<?php
 			foreach ( $this->cats as $cat ) {
 				printf( '<option value="%s" %s>%s</option>', $cat->term_id, selected( $this->value(), $cat->term_id, false ), $cat->name );
 			}
-  		?>
+			?>
 			</select>
 		</label>
 		<?php

@@ -13,11 +13,11 @@
 class ETC_Theme_Customizer
 {
 
-  /**
-   * Plugin Slug
-   * @var string
-   */
-  private $plugin_slug = 'extend-theme-customizer';
+	/**
+	 * Plugin Slug
+	 * @var string
+	 */
+	private $plugin_slug = 'extend-theme-customizer';
 
 	/**
 	 * Theme Customizer Setting ID
@@ -25,11 +25,11 @@ class ETC_Theme_Customizer
 	 */
 	private $setting_id = array();
 
-  /**
-   * Instance
-   * @var [type]
-   */
-  private static $instance;
+	/**
+	 * Instance
+	 * @var [type]
+	 */
+	private static $instance;
 
 	/**
 	 * construct
@@ -38,10 +38,10 @@ class ETC_Theme_Customizer
 	public function __construct()
 	{
 
-    // require class file
-    foreach ( glob( ETC_BASE_DIR . '/**/**/class-*.php' ) as $key => $filename) {
-      require_once( $filename );
-    }
+		// require class file
+		foreach ( glob( ETC_BASE_DIR . '/**/**/class-*.php' ) as $key => $filename) {
+			require_once( $filename );
+		}
 
 		$this->json_path = $json_path;
 		$this->setting_id = $this->intialize_customize_setting_id();
@@ -49,34 +49,34 @@ class ETC_Theme_Customizer
 
 	}
 
-  /**
-   * Get Instance
-   *
-   * @return object
-   */
+	/**
+	 * Get Instance
+	 *
+	 * @return object
+	 */
 
-  public static function get_instance() {
+	public static function get_instance() {
 
-    // If the single instance hasn't been set, set it now.
-    if ( null == self::$instance ) {
+		// If the single instance hasn't been set, set it now.
+		if ( null == self::$instance ) {
 
-      self::$instance = new self;
+			self::$instance = new self;
 
-    }
+		}
 
-    return self::$instance;
-  }
+		return self::$instance;
+	}
 
-  /**
-   * Get Plugin Slug
-   *
-   * @return string
-   */
-  public function get_plugin_slug(){
+	/**
+	 * Get Plugin Slug
+	 *
+	 * @return string
+	 */
+	public function get_plugin_slug(){
 
-    return $this->plugin_slug;
+		return $this->plugin_slug;
 
-  }
+	}
 
 	/**
 	 * Get Customize Setting ID
@@ -101,19 +101,19 @@ class ETC_Theme_Customizer
 
 	}
 
-  /**
-   * customize preview js enqueue
-   * @return void
-   */
-  public function customize_preview() {
+	/**
+	 * customize preview js enqueue
+	 * @return void
+	 */
+	public function customize_preview() {
 
-    // $preview_js_uri = get_template_directory_uri() . '/inc/plugins/theme-customizer/assets/js/customizer-preview.js';
-    /**
-     * action filter "gc_theme_customizer_preview_js_uri"
-     */
-    // wp_enqueue_script( 'gc_customize_preview', apply_filters( 'gc_theme_customizer_preview_js_uri', $preview_js_uri ), array( 'customize-preview' ), '3.9', false );
+		// $preview_js_uri = get_template_directory_uri() . '/inc/plugins/theme-customizer/assets/js/customizer-preview.js';
+		/**
+		 * action filter "gc_theme_customizer_preview_js_uri"
+		 */
+		// wp_enqueue_script( 'gc_customize_preview', apply_filters( 'gc_theme_customizer_preview_js_uri', $preview_js_uri ), array( 'customize-preview' ), '3.9', false );
 
-  }
+	}
 
 }
 

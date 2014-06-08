@@ -17,22 +17,22 @@ if ( ! class_exists( 'WP_Customize_Control' ) ){
 class WP_Multi_Image_Control extends \WP_Customize_Control
 {
 
-  /**
-   * Control Slug
-   * @var string
-   */
+	/**
+	 * Control Slug
+	 * @var string
+	 */
 	public $type = 'multi_image';
 
-  /**
-   * Input ID
-   * @var string
-   */
+	/**
+	 * Input ID
+	 * @var string
+	 */
 	protected $input_id = '';
 
-  /**
-   * Thumbnail ID
-   * @var string
-   */
+	/**
+	 * Thumbnail ID
+	 * @var string
+	 */
 	protected $thumbnails_id = '';
 
 	/**
@@ -50,7 +50,7 @@ class WP_Multi_Image_Control extends \WP_Customize_Control
 
 	/**
 	 * js, css enqueue
-   * @return void
+	 * @return void
 	 */
 	public function enqueue()
 	{
@@ -100,8 +100,8 @@ class WP_Multi_Image_Control extends \WP_Customize_Control
 
 	/**
 	 * Return Images
-   *
-   * @return string imaage path
+	 *
+	 * @return string imaage path
 	 */
 	protected function get_images(){
 
@@ -117,8 +117,8 @@ class WP_Multi_Image_Control extends \WP_Customize_Control
 
 	/**
 	 * Return Button
-   *
-   * @return void html
+	 *
+	 * @return void html
 	 */
 	public function the_buttons() {
 	?>
@@ -138,25 +138,25 @@ class WP_Multi_Image_Control extends \WP_Customize_Control
 	 * uploaded images
 	 */
 	public function the_uploaded_images( $srcs = array() )
-  {
+	{
 	?>
-  	<div class="customize-control-content">
+		<div class="customize-control-content">
 		<?php
 		if ( is_array( $srcs ) ) :
-    ?>
+		?>
 			<ul class="thumbnails" data-store="#<?php echo esc_attr( $this->input_id ); ?>" id="<?php echo esc_attr( $this->thumbnails_id ); ?>">
 			<?php
-      foreach ( $srcs as $src ) :
-      ?>
+			foreach ( $srcs as $src ) :
+			?>
 				<li class="thumbnail" style="background-image: url(<?php echo esc_url( $src ); ?>);" data-src="<?php echo esc_url( $src ); ?>">
 				</li>
 			<?php
-      endforeach;
-      ?>
+			endforeach;
+			?>
 			</ul>
 		<?php
 		endif;
-    ?>
+		?>
 	</div>
 	<?php
 	}

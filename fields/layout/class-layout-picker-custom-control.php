@@ -1,6 +1,6 @@
 <?php
 if ( ! class_exists( 'WP_Customize_Control' ) )
-		return NULL;
+	return NULL;
 
 /**
  * Class to create a custom layout control
