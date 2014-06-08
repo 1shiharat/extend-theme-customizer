@@ -1,42 +1,36 @@
 <?php
+
+/**
+ *  Plugin Admin Panel
+ * =====================================================
+ * @package    Extend Theme Customizer
+ * @author     takashi ishihara
+ * @license    GPLv2 or later
+ * @link       https://github.com/1shiharaT/extend-theme-customizer
+ * =====================================================
+ */
+
 class ETC_Admin {
 
 	const VERSION = '0.1';
+
 	/**
 	 * Instance of this class.
-	 *
-	 * @since    1.0.0
-	 *
 	 * @var      object
 	 */
 	protected static $instance = null;
 
 	/**
 	 * Slug of the plugin screen.
-	 *
-	 * @since    1.0.0
-	 *
 	 * @var      string
 	 */
 	protected $plugin_screen_hook_suffix = null;
 
 	/**
-	 * Initialize the plugin by loading admin scripts & styles and adding a
-	 * settings page and menu.
-	 *
-	 * @since     1.0.0
+	 * Initialize
 	 */
 	private function __construct() {
 
-
-		/*
-		 * Call $plugin_slug from public plugin class.
-		 *
-		 * @TODO:
-		 *
-		 * - Rename "ETC_Admin" to the name of your initial plugin class
-		 *
-		 */
 		$plugin = ETC_Theme_Customizer::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
@@ -53,8 +47,6 @@ class ETC_Admin {
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     1.0.0
-	 *
 	 * @return    object    A single instance of this class.
 	 */
 	public static function get_instance() {
@@ -68,7 +60,6 @@ class ETC_Admin {
 	/**
 	 * Register and enqueue admin-specific style sheet.
 	 *
-	 * @since     1.0.0
 	 * @return    null    Return early if no settings page is registered.
 	 */
 
@@ -81,15 +72,13 @@ class ETC_Admin {
 		$screen = get_current_screen();
 
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), ETC_Admin::VERSION );
+			wp_enqueue_style( $this->plugin_slug . '-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), ETC_Admin::VERSION );
 		}
 
 	}
 
 	/**
 	 * Register and enqueue admin-specific JavaScript.
-	 *
-	 * @since     1.0.0
 	 *
 	 * @return    null    Return early if no settings page is registered.
 	 */
@@ -129,10 +118,15 @@ class ETC_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function display_plugin_admin_page() {
+	public function display_plugin_admin_page()
+	{
+
 		$create_nonce =  wp_create_nonce( plugin_basename( __file__ ) );
-		$option = get_option( 'etc_json_settings' );
+		$json_path = get_option( 'etc_json_settings' );
+		$width = get_option( 'etc_width_settings' );
+		$setting_object = WP_Theme_Customizer_Import_Json::get_theme_customizer_object();
 		include_once( 'views/admin.php' );
+
 	}
 
 	/**
@@ -141,7 +135,8 @@ class ETC_Admin {
 	 * @param array $links
 	 * @return array
 	 */
-	public function add_action_links( $links ) {
+	public function add_action_links( $links )
+	{
 
 		return array_merge(
 			array(
@@ -156,7 +151,8 @@ class ETC_Admin {
 	 * action method
 	 * @return [type] [description]
 	 */
-	public function etc_admin_update_option() {
+	public function etc_admin_update_option()
+	{
 
 		$json_file_path = $_POST['etc_json_file'];
 		$nonce = $_POST['_wp_nonce'];
@@ -176,14 +172,17 @@ class ETC_Admin {
 	 * action method
 	 * @return [type] [description]
 	 */
-	public function etc_admin_add_option() {
+	public function etc_admin_add_option()
+	{
 
 		$success = '';
-		$option = get_option( 'etc_json_settings', false );
+		$json_path = get_option( 'etc_json_settings', false );
+		$tc_width = get_option( 'etc_width_settings', false );
+		$tc_column = get_option( 'etc_width_settings', false );
 
-		$default = '';
+		$default = plugin_dir_path( __FILE__ ) . '/json/theme-customizer-setting.json';
 
-		if ( ! $option ) {
+		if ( ! $json_path ) {
 			$success = add_option( 'etc_json_settings', $default );
 		}
 		return $success;

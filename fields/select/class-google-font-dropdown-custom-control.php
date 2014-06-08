@@ -12,8 +12,10 @@ class Google_Font_Dropdown_Custom_Control extends WP_Customize_Control
 
 	public function __construct( $manager, $id, $args = array(), $options = array() )
 	{
+
 		$this->fonts = $this->get_fonts();
 		parent::__construct( $manager, $id, $args );
+
 	}
 
 	/**
@@ -26,12 +28,12 @@ class Google_Font_Dropdown_Custom_Control extends WP_Customize_Control
 		if ( ! empty( $this->fonts ) ) {
 		?>
 		<label>
-			<span class="customize-category-select-control"><?php echo esc_html( $this->label ); ?></span>
+			<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 			<select <?php $this->link(); ?>>
 			<?php
-				foreach ( $this->fonts as $k => $v ) {
-						printf( '<option value="%s" %s>%s</option>', $k, selected( $this->value(), $k, false ), $v->family );
-				}
+			foreach ( $this->fonts as $k => $v ) {
+				printf( '<option value="%s" %s>%s</option>', $k, selected( $this->value(), $k, false ), $v->family );
+			}
 			?>
 			</select>
 		</label>
@@ -70,12 +72,18 @@ class Google_Font_Dropdown_Custom_Control extends WP_Customize_Control
 			fclose( $fp );
 
 			$content = json_decode( $fontContent['body'] );
+
 		}
 
 		if ( $amount == 'all' ) {
+
 			return $content->items;
+
 		} else {
+
 			return array_slice( $content->items, 0, $amount );
+
 		}
+
 	}
 }

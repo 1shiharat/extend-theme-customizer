@@ -1,5 +1,15 @@
 <?php
 
+/**
+ *  Theme Customizer Setting Import By Json
+ * =====================================================
+ * @package    Extend Theme Customizer
+ * @author     takashi ishihara
+ * @license    GPLv2 or later
+ * @link       https://github.com/1shiharaT/extend-theme-customizer
+ * =====================================================
+ */
+
 if ( ! defined( 'WPINC' ) ) exit; // Exit if accessed directly
 
 /**
@@ -63,11 +73,11 @@ class WP_Theme_Customizer_Import_Json
 	public function __construct( $json_path = '' )
 	{
 
-    $json_path = get_option( 'etc_json_settings' );
+		$json_path = get_option( 'etc_json_settings' );
 
-    if ( ! $json_path ) {
-      $json_path = ETC_BASE_DIR . '/json/theme-customizer-setting.json';
-    }
+		if ( ! $json_path ) {
+			$json_path = ETC_BASE_DIR . '/json/theme-customizer-setting.json';
+		}
 
 		// json path
 		$this->json_path = $json_path;
@@ -109,6 +119,10 @@ class WP_Theme_Customizer_Import_Json
 
 	}
 
+	public static function get_theme_customizer_object(){
+		$instance = new self;
+		return $instance->settings;
+	}
 	/**
 	 * Set Theme Customizer Editor Capability
 	 *
@@ -141,11 +155,11 @@ class WP_Theme_Customizer_Import_Json
 
 		do_action( 'gc_theme_customizer_before', $this->wp_customize );
 
-    if ( !$this->settings->setting->theme_slug ) {
-      $this->theme_slug = 'theme_mods_' . $this->theme_name;
-    } else {
-  		$this->theme_slug = 'theme_mods_' . $this->settings->setting->theme_slug;
-    }
+		if ( !$this->settings->setting->theme_slug ) {
+			$this->theme_slug = 'theme_mods_' . $this->theme_name;
+		} else {
+			$this->theme_slug = 'theme_mods_' . $this->settings->setting->theme_slug;
+		}
 
 		foreach ( $this->settings->sections as $section_name => $section ) :
 
@@ -220,7 +234,7 @@ class WP_Theme_Customizer_Import_Json
 		$setting_arg['capability'] = $this->capability;
 		$setting_arg = $this->deploy_settings( $setting_arg, $settings, array( 'label', 'choices' ) );
 
-		if ( 'select' === $setting_arg['type'] || 'radio' === $setting_arg['type'] ) {
+		if ( 'select' === $setting_arg['type'] || 'radio' === $setting_arg['type'] || 'text' === $setting_arg['type'] ) {
 
 			$setting_arg['type'] = 'option';
 
@@ -363,7 +377,6 @@ class WP_Theme_Customizer_Import_Json
 
 		switch ( $settings->type ) {
 
-			// type "color"
 			case 'color':
 
 				$this->wp_customize->
@@ -376,7 +389,6 @@ class WP_Theme_Customizer_Import_Json
 					);
 				break;
 
-			// type "image"
 			case 'image':
 				$this->wp_customize->
 					add_control(
@@ -386,189 +398,178 @@ class WP_Theme_Customizer_Import_Json
 							$this->set_control( $section_name, $setting_name, $settings )
 						)
 					);
-        break;
-
-      case 'date-picker':
-        $this->wp_customize->
-          add_control(
-            new Date_Picker_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
 				break;
 
-      case 'layout-picker':
+			case 'date-picker':
+				$this->wp_customize->
+					add_control(
+						new Date_Picker_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
+				break;
 
-        $this->wp_customize->
-          add_control(
-            new Layout_Picker_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+			case 'layout-picker':
 
-        break;
+				$this->wp_customize->
+					add_control(
+						new Layout_Picker_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
 
-      case 'category-dropdown':
+				break;
 
-        $this->wp_customize->
-          add_control(
-            new Category_Dropdown_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+			case 'category-dropdown':
 
-        break;
+				$this->wp_customize->
+					add_control(
+						new Category_Dropdown_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
 
-      case 'google-font':
+				break;
 
-        $this->wp_customize->
-          add_control(
-            new Google_Font_Dropdown_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+			case 'google-font':
 
-        break;
+				$this->wp_customize->
+					add_control(
+						new Google_Font_Dropdown_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
 
-      case 'menu-dropdown':
+				break;
 
-        $this->wp_customize->
-          add_control(
-            new Menu_Dropdown_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+			case 'menu-dropdown':
 
-        break;
+				$this->wp_customize->
+					add_control(
+						new Menu_Dropdown_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
 
-      case 'post-dropdown':
+				break;
 
-        $this->wp_customize->
-          add_control(
-            new Post_Dropdown_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+			case 'post-dropdown':
 
-        break;
+				$this->wp_customize->
+					add_control(
+						new Post_Dropdown_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
 
-      case 'post-type-dropdown':
+				break;
 
-        $this->wp_customize->
-          add_control(
-            new Post_Type_Dropdown_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+			case 'post-type-dropdown':
 
-        break;
+				$this->wp_customize->
+					add_control(
+						new Post_Type_Dropdown_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
 
-      case 'tags-dropdown':
+				break;
 
-        $this->wp_customize->
-          add_control(
-            new Tags_Dropdown_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+			case 'tags-dropdown':
 
-        break;
+				$this->wp_customize->
+					add_control(
+						new Tags_Dropdown_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
 
-      case 'taxonomy-dropdown':
+				break;
 
-        $this->wp_customize->
-          add_control(
-            new Taxonomy_Dropdown_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+			case 'taxonomy-dropdown':
 
-        break;
+				$this->wp_customize->
+					add_control(
+						new Taxonomy_Dropdown_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
 
-      case 'user-dropdown':
+				break;
 
-        $this->wp_customize->
-          add_control(
-            new User_Dropdown_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+			case 'user-dropdown':
 
-        break;
+				$this->wp_customize->
+					add_control(
+						new User_Dropdown_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
+
+				break;
 
 
-      case 'text-editor':
+			case 'text-editor':
 
-        $this->wp_customize->
-          add_control(
-            new Text_Editor_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+				$this->wp_customize->
+					add_control(
+						new Text_Editor_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
 
-        break;
+				break;
 
-      case 'textarea':
+			case 'textarea':
 
-        $this->wp_customize->
-          add_control(
-            new Textarea_Custom_Control(
-              $this->wp_customize,
-              $setting_name,
-              $this->set_control( $section_name, $setting_name, $settings )
-            )
-          );
+				$this->wp_customize->
+					add_control(
+						new Textarea_Custom_Control(
+							$this->wp_customize,
+							$setting_name,
+							$this->set_control( $section_name, $setting_name, $settings )
+						)
+					);
 
-        break;
+				break;
 
-      default:
+			case 'text':
+			case 'select':
+			case 'radio':
+			case 'option':
 
-        $this->wp_customize->
-          add_control(
-            $setting_name,
-            $this->set_control( $section_name, $setting_name, $settings )
-          );
+				$this->wp_customize->
+					add_control(
+						$setting_name,
+						$this->set_control( $section_name, $setting_name, $settings )
+					);
 
-          break;
+					break;
 		}
 
-    do_action( 'ejt_register_conrtol_type', $section_name, $setting_name, $settings );
-
-	}
-
-	/**
-	 * customize preview js enqueue
-	 * @return void
-	 */
-	public function customize_preview() {
-
-		$preview_js_uri = get_template_directory_uri() . '/inc/plugins/theme-customizer/assets/js/customizer-preview.js';
-		/**
-		 * action filter "gc_theme_customizer_preview_js_uri"
-		 */
-		wp_enqueue_script( 'gc_customize_preview', apply_filters( 'gc_theme_customizer_preview_js_uri', $preview_js_uri ), array( 'customize-preview' ), '3.9', false );
+		do_action( 'ejt_register_conrtol_type', $section_name, $setting_name, $settings );
 
 	}
 

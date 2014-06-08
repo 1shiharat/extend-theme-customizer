@@ -10,12 +10,13 @@ class Taxonomy_Dropdown_Custom_Control extends WP_Customize_Control
 {
 	private $options = false;
 
-    public function __construct($manager, $id, $args = array(), $options = array())
-    {
-        $this->options = $options;
+	public function __construct( $manager, $id, $args = array(), $options = array() )
+	{
 
-        parent::__construct( $manager, $id, $args );
-    }
+		$this->options = $options;
+		parent::__construct( $manager, $id, $args );
+
+	}
 
 	/**
 	 * Render the control's content.
@@ -26,9 +27,9 @@ class Taxonomy_Dropdown_Custom_Control extends WP_Customize_Control
 	 * @return  void
 	 */
 	public function render_content()
-    {
-        // call wp_dropdown_cats to get data and add to select field
-        add_action( 'wp_dropdown_cats', array( $this, 'wp_dropdown_cats' ) );
+	{
+		// call wp_dropdown_cats to get data and add to select field
+		add_action( 'wp_dropdown_cats', array( $this, 'wp_dropdown_cats' ) );
 
 		// Set defaults
 		$this->defaults = array(
@@ -53,17 +54,14 @@ class Taxonomy_Dropdown_Custom_Control extends WP_Customize_Control
 		<?php
 	}
 
-    /**
-     * Replace WP default dropdown
-     *
-     * @since   11/14/2012
-     * @return  String $output
-     */
-    public function wp_dropdown_cats( $output )
-    {
-        $output = str_replace( '<select', '<select ' . $this->get_link(), $output );
-
-        return $output;
-    }
+	/**
+	 * Replace WP default dropdown
+	 *
+	 * @return  String $output
+	 */
+	public function wp_dropdown_cats( $output )
+	{
+			$output = str_replace( '<select', '<select ' . $this->get_link(), $output );
+			return $output;
+	}
 }
-?>

@@ -14,7 +14,6 @@ class Textarea_Custom_Control extends WP_Customize_Control
 	 *
 	 * Allows the content to be overriden without having to rewrite the wrapper.
 	 *
-	 * @since   10/16/2012
 	 * @return  void
 	 */
 	public function render_content() {

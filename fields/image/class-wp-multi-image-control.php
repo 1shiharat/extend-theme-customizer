@@ -1,29 +1,39 @@
 <?php
 
+/**
+ *  Media Uploader For Theme Customizer
+ * =====================================================
+ * @package    Extend Theme Customizer
+ * @author     takashi ishihara
+ * @license    GPLv2 or later
+ * @link       https://github.com/1shiharaT/extend-theme-customizer
+ * =====================================================
+ */
+
 if ( ! class_exists( 'WP_Customize_Control' ) ){
 	return NULL;
 }
 
-/**
- * =====================================================
- * @package    Grow Creater
- * @subpackage WP Multi Image Control
- * @author     Grow Group
- * @license    http://creativecommons.org/licenses/by/2.1/jp/
- * @link       http://grow-group.jp
- * @copyright  2014 Drema Style
- * =====================================================
- */
-
-
 class WP_Multi_Image_Control extends \WP_Customize_Control
 {
 
+  /**
+   * Control Slug
+   * @var string
+   */
 	public $type = 'multi_image';
 
-	protected $inputId = '';
+  /**
+   * Input ID
+   * @var string
+   */
+	protected $input_id = '';
 
-	protected $thumbnailsId = '';
+  /**
+   * Thumbnail ID
+   * @var string
+   */
+	protected $thumbnails_id = '';
 
 	/**
 	 * construct
@@ -33,13 +43,14 @@ class WP_Multi_Image_Control extends \WP_Customize_Control
 
 		parent::__construct( $manager, $id, $args );
 
-		$this->inputId = $this->type . '_control_' . $this->id;
-		$this->thumbnailsId = $this->inputId . '_thumbnails';
+		$this->input_id = $this->type . '_control_' . $this->id;
+		$this->thumbnails_id = $this->input_id . '_thumbnails';
 
 	}
 
 	/**
 	 * js, css enqueue
+   * @return void
 	 */
 	public function enqueue()
 	{
@@ -88,7 +99,9 @@ class WP_Multi_Image_Control extends \WP_Customize_Control
 	}
 
 	/**
-	 * return images
+	 * Return Images
+   *
+   * @return string imaage path
 	 */
 	protected function get_images(){
 
@@ -103,16 +116,18 @@ class WP_Multi_Image_Control extends \WP_Customize_Control
 	}
 
 	/**
-	 * return button
+	 * Return Button
+   *
+   * @return void html
 	 */
 	public function the_buttons() {
 	?>
 		<div>
-				<input type="hidden" value="<?php echo esc_attr( $this->value() ); ?>" <?php $this->link(); ?> id="<?php echo esc_attr( $this->inputId ); ?>" data-thumbs-container="#<?php echo esc_attr( $this->thumbnailsId ); ?>" class="multi-images-control-input"/>
-				<a href="#" class="button-secondary multi-images-upload" data-store="#<?php echo esc_attr( $this->inputId ); ?>">
+				<input type="hidden" value="<?php echo esc_attr( $this->value() ); ?>" <?php $this->link(); ?> id="<?php echo esc_attr( $this->input_id ); ?>" data-thumbs-container="#<?php echo esc_attr( $this->thumbnails_id ); ?>" class="multi-images-control-input"/>
+				<a href="#" class="button-secondary multi-images-upload" data-store="#<?php echo esc_attr( $this->input_id ); ?>">
 						<?php echo __( 'Upload', 'custom_theme_customizer' ); ?>
 				</a>
-				<a href="#" class="button-secondary multi-images-remove" data-store="#<?php echo esc_attr( $this->inputId ); ?>" data-thumbs-container="#<?php echo esc_attr( $this->thumbnailsId ); ?>">
+				<a href="#" class="button-secondary multi-images-remove" data-store="#<?php echo esc_attr( $this->input_id ); ?>" data-thumbs-container="#<?php echo esc_attr( $this->thumbnails_id ); ?>">
 					 <?php echo __( 'Remove', 'custom_theme_customizer'); ?>
 			 </a>
 		</div>
@@ -122,19 +137,26 @@ class WP_Multi_Image_Control extends \WP_Customize_Control
 	/**
 	 * uploaded images
 	 */
-	public function the_uploaded_images( $srcs = array() ){
+	public function the_uploaded_images( $srcs = array() )
+  {
 	?>
-	<div class="customize-control-content">
+  	<div class="customize-control-content">
 		<?php
-		if ( is_array( $srcs ) ): ?>
-			<ul class="thumbnails" data-store="#<?php echo esc_attr( $this->inputId ); ?>" id="<?php echo esc_attr( $this->thumbnailsId ); ?>">
-			<?php foreach ( $srcs as $src ): ?>
+		if ( is_array( $srcs ) ) :
+    ?>
+			<ul class="thumbnails" data-store="#<?php echo esc_attr( $this->input_id ); ?>" id="<?php echo esc_attr( $this->thumbnails_id ); ?>">
+			<?php
+      foreach ( $srcs as $src ) :
+      ?>
 				<li class="thumbnail" style="background-image: url(<?php echo esc_url( $src ); ?>);" data-src="<?php echo esc_url( $src ); ?>">
 				</li>
-			<?php endforeach; ?>
+			<?php
+      endforeach;
+      ?>
 			</ul>
 		<?php
-		endif; ?>
+		endif;
+    ?>
 	</div>
 	<?php
 	}

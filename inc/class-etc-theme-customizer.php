@@ -1,12 +1,12 @@
 <?php
+
 /**
+ *  Extends Theme Customizer Settings Init
  * =====================================================
- * @package    Grow Creater
- * @subpackage Theme Customizer Settings
- * @author     Grow Group
- * @license    http://creativecommons.org/licenses/by/2.1/jp/
- * @link       http://grow-group.jp
- * @copyright  2014 Drema Style
+ * @package    Extend Theme Customizer
+ * @author     takashi ishihara
+ * @license    GPLv2 or later
+ * @link       https://github.com/1shiharaT/extend-theme-customizer
  * =====================================================
  */
 
@@ -38,11 +38,7 @@ class ETC_Theme_Customizer
 	public function __construct()
 	{
 
-    // if ( ! $json_path ) {
-    //   $json_path = ETC_BASE_DIR . '/json/theme-customizer-setting.json';
-    // }
-
-    // require
+    // require class file
     foreach ( glob( ETC_BASE_DIR . '/**/**/class-*.php' ) as $key => $filename) {
       require_once( $filename );
     }
@@ -55,25 +51,38 @@ class ETC_Theme_Customizer
 
   /**
    * Get Instance
-   * @return [type] [description]
+   *
+   * @return object
    */
+
   public static function get_instance() {
+
     // If the single instance hasn't been set, set it now.
     if ( null == self::$instance ) {
+
       self::$instance = new self;
+
     }
 
     return self::$instance;
   }
 
+  /**
+   * Get Plugin Slug
+   *
+   * @return string
+   */
   public function get_plugin_slug(){
+
     return $this->plugin_slug;
+
   }
 
 	/**
-	 *
-	 * @return [type] [description]
+	 * Get Customize Setting ID
+	 * @return array $setting_id :
 	 */
+
 	public function intialize_customize_setting_id(){
 
 		$setting_id     = array();
@@ -91,5 +100,20 @@ class ETC_Theme_Customizer
 		return $setting_id;
 
 	}
+
+  /**
+   * customize preview js enqueue
+   * @return void
+   */
+  public function customize_preview() {
+
+    // $preview_js_uri = get_template_directory_uri() . '/inc/plugins/theme-customizer/assets/js/customizer-preview.js';
+    /**
+     * action filter "gc_theme_customizer_preview_js_uri"
+     */
+    // wp_enqueue_script( 'gc_customize_preview', apply_filters( 'gc_theme_customizer_preview_js_uri', $preview_js_uri ), array( 'customize-preview' ), '3.9', false );
+
+  }
+
 }
 
