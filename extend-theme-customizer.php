@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Extend Json Theme Customizer
-Plugin URI: http://web-layman.com/
+Plugin URI: https://github.com/paulund/wordpress-theme-customizer-custom-controls
 Description: Extend Json Theme Customizer
 Version: 0.0.1
 Author: Takashi Ishihara
