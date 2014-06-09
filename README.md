@@ -1,7 +1,13 @@
 # Extend Theme Customizer
 
-WordPressのテーマカスタマイザーを拡張し、
-json ファイルからテーマカスタマイザーの設定を行います。
+* WordPressのテーマカスタマイザーを拡張項目を追加
+* json ファイルからテーマカスタマイザーの設定を読み込み
+
+テーマカスタマイザー API が実際の制作現場であまり使われていないため、
+すこしだけでも楽に実装できるように制作しました。( 微妙ですが.. )
+
+[Github Upadter](https://github.com/afragen/github-updater) を別途インストールすることで、
+管理画面からアップデート可能となります。
 
 ## Installation
 
@@ -40,6 +46,9 @@ git clone https://github.com/1shiharaT/extend-theme-customizer.git extend-theme-
 
 ```
 
+※ [サンプル設定ファイル](https://gist.github.com/1shiharaT/dfadfe3f12d021e70003)
+
+
 2. セッティングファイルを FTP などでサイト内にアップロード。
   又は、Gist や Drop Box などに設置。
 
@@ -54,7 +63,7 @@ git clone https://github.com/1shiharaT/extend-theme-customizer.git extend-theme-
 * color : カラーピッカー
 * image : メディアアップロード
 * layout-picker : レイアウトピッカー
-* date-picker : 日付ピッカー
+* date-picker : 日付ピッカー ( HTML5 )
 * category-dropdown : カテゴリードロップダウン
 * google-font : Google Font
 * menu-dropdown : メニュードロップダウン
@@ -69,3 +78,8 @@ git clone https://github.com/1shiharaT/extend-theme-customizer.git extend-theme-
 * カスタマイザープレビュー用の javascript を自動出力
 * 設定に応じて動的にCSSを出力
 * ページ毎に設定項目の変更
+
+
+## Credit
+
+* [paulund/WordPress Theme Customizer Custom Controls](https://github.com/paulund/wordpress-theme-customizer-custom-controls)

@@ -23,16 +23,15 @@ GitHub Branch: master
 // defined Base Dir
 define( 'ETC_BASE_DIR', dirname( __FILE__ ) );
 
-
+// Load Class File
 require_once( dirname( __FILE__ ) . '/inc/class-etc-theme-customizer.php' );
 require_once( dirname( __FILE__ ) . '/inc/class-wp-theme-customizer-import-json.php' );
 
-
-// Plugin Loaded File
+// Plugin Load File
 add_action( 'plugins_loaded', array( 'ETC_Theme_Customizer', 'get_instance' ) );
 
 /**
- * Admin
+ * Load Admin Class
  */
 
 if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {

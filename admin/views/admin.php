@@ -18,6 +18,8 @@ table.widefat{
   <input type="submit" class="button button-primary" value="<?php echo __( 'この設定で保存', 'extend-theme-customizer' ); ?>">
 </form>
 
+<?php if ( $setting_object ): ?>
+
 <h2>設定項目リスト</h2>
 
 <table class=" widefat">
@@ -77,5 +79,4 @@ foreach ( $setting_object->sections as $settings_key => $settings ) : ?>
 </table>
 <?php endforeach;?>
 
-
-</p>
+<?php endif ?>
