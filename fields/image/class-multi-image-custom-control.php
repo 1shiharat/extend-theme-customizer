@@ -14,7 +14,7 @@ if ( ! class_exists( 'WP_Customize_Control' ) ){
 	return NULL;
 }
 
-class Multi_Image_Custom_Control extends \WP_Customize_Control
+class Multi_Image_Custom_Control extends WP_Customize_Control
 {
 
 	/**
@@ -75,22 +75,22 @@ class Multi_Image_Custom_Control extends \WP_Customize_Control
 	public function render_content()
 	{
 
-		$imageSrcs = explode( ',' , $this->value() );
+		$image_srcs = explode( ',' , $this->value() );
 
-		if ( ! is_array( $imageSrcs ) ) {
-				$imageSrcs = array();
+		if ( ! is_array( $image_srcs ) ) {
+				$image_srcs = array();
 		}
 
 		$this->the_title();
 		$this->the_buttons();
-		$this->the_uploaded_images( $imageSrcs );
+		$this->the_uploaded_images( $image_srcs );
 
 	}
 
 		/**
 		 * return title
 		 */
-	protected function the_title()
+	public function the_title()
 	{
 		echo '<label><span class="customize-control-title">';
 		echo esc_html( $this->label );
@@ -103,7 +103,7 @@ class Multi_Image_Custom_Control extends \WP_Customize_Control
 	 *
 	 * @return string imaage path
 	 */
-	protected function get_images(){
+	public function get_images(){
 
 		$options = $this->value();
 
@@ -123,7 +123,7 @@ class Multi_Image_Custom_Control extends \WP_Customize_Control
 	public function the_buttons() {
 	?>
 		<div>
-				<input type="hidden" value="<?php echo esc_attr( $this->value() ); ?>" <?php $this->link(); ?> id="<?php echo esc_attr( $this->input_id ); ?>" data-thumbs-container="#<?php echo esc_attr( $this->thumbnails_id ); ?>" class="multi-images-control-input"/>
+				<input type="hidden" value="<?php echo esc_url( $this->value() ); ?>" <?php $this->link(); ?> id="<?php echo esc_attr( $this->input_id ); ?>" data-thumbs-container="#<?php echo esc_attr( $this->thumbnails_id ); ?>" class="multi-images-control-input"/>
 				<a href="#" class="button-secondary multi-images-upload" data-store="#<?php echo esc_attr( $this->input_id ); ?>">
 						<?php echo __( 'Upload', 'custom_theme_customizer' ); ?>
 				</a>

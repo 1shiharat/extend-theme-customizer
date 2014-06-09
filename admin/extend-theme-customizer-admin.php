@@ -183,7 +183,7 @@ class ETC_Admin {
 		$json_path = get_option( 'etc_json_settings', false );
 		$tc_width = get_option( 'etc_width_settings', false );
 		$tc_column = get_option( 'etc_width_settings', false );
-		$default = plugin_dir_path( __FILE__ ) . '/json/theme-customizer-setting.json';
+		$default = ETC_BASE_DIR . '/json/theme-customizer-setting.json';
 
 		if ( ! $json_path ) {
 			$success = add_option( 'etc_json_settings', $default );

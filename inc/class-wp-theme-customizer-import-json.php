@@ -73,7 +73,7 @@ class WP_Theme_Customizer_Import_Json
 	public function __construct( $json_path = '' )
 	{
 
-		$json_path = get_option( 'etc_json_settings' );
+		$json_path = get_option( 'etc_json_settings', false );
 
 		if ( ! $json_path ) {
 			$json_path = ETC_BASE_DIR . '/json/theme-customizer-setting.json';
@@ -191,7 +191,11 @@ class WP_Theme_Customizer_Import_Json
 	private function get_theme_name()
 	{
 
-		$theme_name = get_template();
+		if ( get_template() == get_stylesheet() ) {
+			$theme_name = get_template();
+		} else {
+			$theme_name = get_stylesheet();
+		}
 
 		return apply_filters( 'customizer_theme_name', $theme_name );
 
@@ -234,7 +238,10 @@ class WP_Theme_Customizer_Import_Json
 		$setting_arg['capability'] = $this->capability;
 		$setting_arg = $this->deploy_settings( $setting_arg, $settings, array( 'label', 'choices' ) );
 
-		if ( 'select' === $setting_arg['type'] || 'radio' === $setting_arg['type'] || 'text' === $setting_arg['type'] ) {
+		if ( 'image'    === $setting_arg['type']
+				 || 'select' === $setting_arg['type']
+				 || 'radio'  === $setting_arg['type']
+				 || 'text'   === $setting_arg['type'] ) {
 
 			$setting_arg['type'] = 'option';
 

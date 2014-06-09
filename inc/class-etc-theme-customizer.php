@@ -33,12 +33,11 @@ class ETC_Theme_Customizer
 
 	/**
 	 * construct
-	 * @param string : $json_path
 	 */
 	public function __construct()
 	{
 
-		// require class file
+		// Require Fields File
 		$support_fields = array(
 			'date' => array(
 				'date-picker'
@@ -72,7 +71,6 @@ class ETC_Theme_Customizer
 			}
 		}
 
-		$this->json_path = $json_path;
 		$this->setting_id = $this->intialize_customize_setting_id();
 		add_action( 'init', array( $this, 'intialize_customize_setting_id' ) );
 
