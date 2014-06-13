@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Extend Json Theme Customizer
-Plugin URI: https://github.com/paulund/wordpress-theme-customizer-custom-controls
+Plugin URI: https://github.com/1shiharaT/extend-theme-customizer
 Description: Extend Json Theme Customizer
 Version: 0.0.1
 Author: Takashi Ishihara
@@ -10,24 +10,27 @@ GitHub Plugin URI: 1shiharaT/extend-theme-customizer
 GitHub Branch: master
 */
 
+if ( ! defined( 'WPINC' ) ) {
+  exit;
+}
+
 /**
- *  Theme Customizer Setting Import By Json
- * =====================================================
- * @package    Extend Theme Customizer
- * @author     takashi ishihara
- * @license    GPLv2 or later
- * @link       https://github.com/1shiharaT/extend-theme-customizer
- * =====================================================
+ * defined Base Dir
  */
 
-// defined Base Dir
 define( 'ETC_BASE_DIR', dirname( __FILE__ ) );
 
-// Load Class File
+/**
+ * Include Class File
+ */
+
 require_once( dirname( __FILE__ ) . '/inc/class-etc-theme-customizer.php' );
 require_once( dirname( __FILE__ ) . '/inc/class-wp-theme-customizer-import-json.php' );
 
-// Plugin Load File
+/**
+ * Action Hook Plugin Loaded
+ */
+
 add_action( 'plugins_loaded', array( 'ETC_Theme_Customizer', 'get_instance' ) );
 
 /**

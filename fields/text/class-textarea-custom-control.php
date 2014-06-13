@@ -9,6 +9,15 @@ if ( ! class_exists( 'WP_Customize_Control' ) )
 
 class Textarea_Custom_Control extends WP_Customize_Control
 {
+
+	/**
+	 * __construct
+	 */
+	public function __construct( $manager, $id, $args = array(), $options = array() )
+	{
+		parent::__construct( $manager, $id, $args );
+	}
+
 	/**
 	 * Render the control's content.
 	 *

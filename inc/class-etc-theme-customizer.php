@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'WPINC' ) ) exit; // Exit if accessed directly
 
 /**
  *  Extends Theme Customizer Settings Init

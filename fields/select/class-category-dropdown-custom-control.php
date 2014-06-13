@@ -1,7 +1,7 @@
 <?php
-
-if ( ! class_exists( 'WP_Customize_Control' ) )
-		return NULL;
+if ( ! class_exists( 'WP_Customize_Control' ) ){
+  return NULL;
+}
 
 /**
  * A class to create a dropdown for all categories in your wordpress site

@@ -10,7 +10,9 @@
  * =====================================================
  */
 
-if ( ! defined( 'WPINC' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'WPINC' ) ) {
+	exit;
+}
 
 /**
  * class WP_Theme_Customizer_Import_Json
@@ -241,6 +243,8 @@ class WP_Theme_Customizer_Import_Json
 		if ( 'image'    === $setting_arg['type']
 				 || 'select' === $setting_arg['type']
 				 || 'radio'  === $setting_arg['type']
+				 || 'textarea'  === $setting_arg['type']
+				 || 'text-editor'  === $setting_arg['type']
 				 || 'text'   === $setting_arg['type'] ) {
 
 			$setting_arg['type'] = 'option';
@@ -574,6 +578,7 @@ class WP_Theme_Customizer_Import_Json
 					);
 
 					break;
+
 		}
 
 		do_action( 'ejt_register_conrtol_type', $section_name, $setting_name, $settings );

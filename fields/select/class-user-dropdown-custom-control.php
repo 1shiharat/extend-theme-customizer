@@ -1,8 +1,4 @@
 <?php
-/**
- * Customize for user select, extend the WP customizer
- */
-
 if ( ! class_exists( 'WP_Customize_Control' ) ){
 	return NULL;
 }

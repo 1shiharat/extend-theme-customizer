@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'WPINC' ) ) exit;
 
 /**
  *  Plugin Admin Panel
@@ -185,9 +186,11 @@ class ETC_Admin {
 		$tc_column = get_option( 'etc_width_settings', false );
 		$default = ETC_BASE_DIR . '/json/theme-customizer-setting.json';
 
+    // Set Default Path
 		if ( ! $json_path ) {
 			$success = add_option( 'etc_json_settings', $default );
 		}
 		return $success;
+
 	}
 }

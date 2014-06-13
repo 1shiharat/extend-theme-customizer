@@ -1,10 +1,8 @@
 <?php
-/**
- * Customize for taxonomy with dropdown, extend the WP customizer
- */
 
-if ( ! class_exists( 'WP_Customize_Control' ) )
+if ( ! class_exists( 'WP_Customize_Control' ) ){
 	return NULL;
+}
 
 class Taxonomy_Dropdown_Custom_Control extends WP_Customize_Control
 {
@@ -20,10 +18,7 @@ class Taxonomy_Dropdown_Custom_Control extends WP_Customize_Control
 
 	/**
 	 * Render the control's content.
-	 *
 	 * Allows the content to be overriden without having to rewrite the wrapper.
-	 *
-	 * @since   11/14/2012
 	 * @return  void
 	 */
 	public function render_content()
