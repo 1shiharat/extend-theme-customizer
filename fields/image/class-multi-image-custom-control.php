@@ -125,7 +125,7 @@ class Multi_Image_Custom_Control extends WP_Customize_Control
 		<div>
 				<input type="hidden" value="<?php echo esc_url( $this->value() ); ?>" <?php $this->link(); ?> id="<?php echo esc_attr( $this->input_id ); ?>" data-thumbs-container="#<?php echo esc_attr( $this->thumbnails_id ); ?>" class="multi-images-control-input"/>
 				<a href="#" class="button-secondary multi-images-upload" data-store="#<?php echo esc_attr( $this->input_id ); ?>">
-						<?php echo __( 'Upload', 'custom_theme_customizer' ); ?>
+						<?php echo __( 'Upload', 'extend-theme-customizer' ); ?>
 				</a>
 				<a href="#" class="button-secondary multi-images-remove" data-store="#<?php echo esc_attr( $this->input_id ); ?>" data-thumbs-container="#<?php echo esc_attr( $this->thumbnails_id ); ?>">
 					 <?php echo __( 'Remove', 'custom_theme_customizer'); ?>
