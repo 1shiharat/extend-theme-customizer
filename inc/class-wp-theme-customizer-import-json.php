@@ -55,6 +55,18 @@ class WP_Theme_Customizer_Import_Json
 	private $json_path = '';
 
 
+	/**
+	 * Set Ignore Control Key
+	 * @var array
+	 */
+	private $ignore_control_keys = array();
+
+	/**
+	 * Set Ignore Control Key
+	 * @var array
+	 */
+	private $ignore_settings_keys = array();
+
 
 	/**
 	 * set settings object
@@ -88,10 +100,16 @@ class WP_Theme_Customizer_Import_Json
 		$this->theme_name = $this->get_theme_name();
 
 		// register json
+		// if ( get_transient ) {
+		// 	# code...
+		// }
 		$this->settings = $this->register_json( apply_filters( 'set_theme_customizer_json_file', $json_path ) );
 
 		// editor capability
 		$this->capability = $this->set_capability();
+
+		$this->ignore_settings_key();
+		$this->ignore_control_key();
 
 		/**
 		 * Register action hook
@@ -102,6 +120,9 @@ class WP_Theme_Customizer_Import_Json
 		// add_action( 'customize_preview_init', array( $this, 'customize_preview' ) );
 
 		add_action( 'customize_register', array( $this, 'register_customizer' ), 99, 1 );
+
+		// output css
+		add_action( 'wp_head', array( $this, 'output_wphead_css' ), 10 );
 
 	}
 
@@ -238,7 +259,7 @@ class WP_Theme_Customizer_Import_Json
 
 		$setting_arg = array();
 		$setting_arg['capability'] = $this->capability;
-		$setting_arg = $this->deploy_settings( $setting_arg, $settings, array( 'label', 'choices' ) );
+		$setting_arg = $this->deploy_settings( $setting_arg, $settings, $this->ignore_settings_keys );
 
 		if ( 'image'    === $setting_arg['type']
 				 || 'select' === $setting_arg['type']
@@ -274,7 +295,7 @@ class WP_Theme_Customizer_Import_Json
 		$setting_arg['section'] = $section_name;
 		$setting_arg['settings'] = $this->theme_slug . '['. $setting_name . ']';
 
-		$setting_arg = $this->deploy_settings( $setting_arg, $settings, array( 'transport', 'capability', 'default', 'type', 'target' ) );
+		$setting_arg = $this->deploy_settings( $setting_arg, $settings, $this->ignore_control_keys );
 
 		if ( 'select' == $settings->type
 				 || 'radio' == $settings->type ) {
@@ -371,7 +392,6 @@ class WP_Theme_Customizer_Import_Json
 			);
 
 	}
-
 
 	/**
 	 * Add Control to WP Theme Customizer
@@ -582,6 +602,89 @@ class WP_Theme_Customizer_Import_Json
 		}
 
 		do_action( 'ejt_register_conrtol_type', $section_name, $setting_name, $settings );
+
+	}
+
+	/**
+	 * set ignore settings key
+	 * @return array
+	 */
+	public function ignore_settings_key()
+	{
+		$ignore_settings_keys = array( 'label', 'choices', 'output' );
+		$this->ignore_settings_keys = $ignore_settings_keys;
+	}
+
+	/**
+	 * set ignore control key
+	 * @return array
+	 */
+	public function ignore_control_key()
+	{
+		$ignore_control_keys = array( 'transport', 'capability', 'default', 'type', 'target', 'output' );
+		$this->ignore_control_keys = $ignore_control_keys;
+	}
+
+	/**
+	 * Output CSS to wp_head
+	 * @return [type] [description]
+	 */
+	public function output_wphead_css()
+	{
+
+		$css = '<style>';
+		$css .= $this->css_parser();
+		$css .= '</style>';
+
+		echo $css;
+
+	}
+
+	/**
+	 * CSS Parser
+	 * @return [type] [description]
+	 */
+	public function css_parser()
+	{
+		$style = '';
+
+		if ( ! $this->settings ) {
+			return;
+		}
+
+		foreach ( $this->settings as $section_key => $sections ) {
+
+			foreach ( $sections as $setting_key => $settings ) {
+
+				if ( ! $settings->setting ) {
+					continue;
+				}
+
+				foreach ( $settings->setting as $customizer_key => $config ) {
+					if ( $config->output ) {
+						$style .= $this->array_to_css( $config->output, $customizer_key );
+					}
+				}
+			}
+		}
+
+		return $style;
+
+	}
+
+	public function array_to_css( $array_css, $customizer_key )
+	{
+		$css = '';
+
+		if ( ! $array_css ) {
+			return ;
+		}
+
+		foreach ( $array_css as $selector => $priority ) {
+			$css = $selector . '{' . $priority . ' :' . get_theme_mod( $customizer_key, '' ) . ';}';
+		}
+
+		return $css;
 
 	}
 

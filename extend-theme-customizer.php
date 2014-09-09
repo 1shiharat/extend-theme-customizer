@@ -19,6 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 
 define( 'ETC_BASE_DIR', dirname( __FILE__ ) );
+define( 'ETC_SLUG', dirname( __FILE__ ) );
 
 
 /**
@@ -59,3 +60,6 @@ if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
   add_action( 'plugins_loaded', array( 'ETC_Admin', 'get_instance' ) );
 
 }
+
+
+

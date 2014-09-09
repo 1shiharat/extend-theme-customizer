@@ -36,7 +36,8 @@ class ETC_Admin {
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
-
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
@@ -73,7 +74,8 @@ class ETC_Admin {
 		$screen = get_current_screen();
 
 		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( $this->plugin_slug . '-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), ETC_Admin::VERSION );
+			// wp_enqueue_style( $this->plugin_slug . '-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), ETC_Admin::VERSION );
+			wp_enqueue_style( $this->plugin_slug . '-admin-styles-json-editor', '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css', array(), ETC_Admin::VERSION );
 		}
 
 	}
@@ -91,9 +93,11 @@ class ETC_Admin {
 
 		$screen = get_current_screen();
 
-		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), ETC_Admin::VERSION );
-		}
+		// if ( $this->plugin_screen_hook_suffix == $screen->id ) {
+			// wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), ETC_Admin::VERSION );
+			// wp_enqueue_script( $this->plugin_slug . '-admin-script-json-editor', plugins_url( '/assets/FlexiJsonEditor/jquery.jsoneditor.js', __FILE__ ), array( 'jquery' ), ETC_Admin::VERSION );
+			wp_enqueue_script( $this->plugin_slug . '-admin-script-json2', plugins_url( '/assets/json-editor/dist/jsoneditor.min.js', __FILE__ ), array( 'jquery' ), ETC_Admin::VERSION );
+		// }
 
 	}
 
@@ -129,7 +133,6 @@ class ETC_Admin {
 
 		// include /admin/views/admin.php
 		include_once( 'views/admin.php' );
-
 	}
 
 	/**
@@ -182,11 +185,14 @@ class ETC_Admin {
 
 		$success = false;
 		$json_path = get_option( 'etc_json_settings', false );
+		if ( $json_path && $json = file_get_contents( $json_path ) ) {
+			set_transient( $this->plugin_slug, $json, (60 * 60 * 24) );
+		}
 		$tc_width = get_option( 'etc_width_settings', false );
 		$tc_column = get_option( 'etc_width_settings', false );
 		$default = ETC_BASE_DIR . '/json/theme-customizer-setting.json';
 
-    // Set Default Path
+		// Set Default Path
 		if ( ! $json_path ) {
 			$success = add_option( 'etc_json_settings', $default );
 		}

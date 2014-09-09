@@ -38,6 +38,10 @@ git clone https://github.com/1shiharaT/extend-theme-customizer.git extend-theme-
           "default": "", // 初期値
           "label": "通常のテキスト", // セッティングのラベル
           "type": "option" // セッティングのタイプ
+          "output": {
+            // セレクターとそれに対応するプロパティを記述することで、インライン CSS としてヘッダー内に吐き出します。
+            ".logo" : "background-color"
+          }
         }
       }
     }

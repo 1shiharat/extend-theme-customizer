@@ -1,109 +1,112 @@
 {
-	"setting": {
-		"capability": "edit_theme_options"
-	},
-	"sections": {
-		"gg_general_settings": {
-			"title": "テキスト系",
-			"priority": 10,
-			"setting": {
-				"general_keywords": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "通常のテキスト",
-					"type": "option"
-				},
-				"general_analytics_code": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "テキストエリア",
-					"type": "textarea"
-				},
-				"general_user_select": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "テキストエディター",
-					"type": "text-editor"
-				}
-			}
-		},
-		"picker_settings": {
-			"title": "ピッカー",
-			"priority": 30,
-			"setting": {
-				"colorpicker": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "カラーピッカー",
-					"type": "color"
-				},
-				"image": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "メディア",
-					"type": "image"
-				},
-				"layout": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "レイアウト",
-					"type": "layout-picker"
-				},
-				"date": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "日付",
-					"type": "date-picker"
-				}
-			}
-		},
-		"select_settings": {
-			"title": "セレクトボックス",
-			"priority": 30,
-			"setting": {
-				"category": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "カテゴリー",
-					"type": "category-dropdown"
-				},
-				"google_font": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "Google Font",
-					"type": "google-font"
-				},
-				"menu_dropdown": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "メニュー選択",
-					"type": "menu-dropdown"
-				},
-				"post_dropdown": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "投稿選択",
-					"type": "post-dropdown"
-				},
-				"post_type_dropdown": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "投稿選択",
-					"type": "post-type-dropdown"
-				},
-				"taxonomy_dropdown": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "投稿タイプ",
-					"type": "taxonomy-dropdown"
-				},
-				"user_dropdown": {
-					"transport": "postMessage",
-					"default": "",
-					"label": "ユーザー",
-					"type": "user-dropdown"
-				}
-			}
-		}
-	}
+  "setting": {
+    "capability": "edit_theme_options"
+  },
+  "sections": {
+    "gg_general_settings": {
+      "title": "テキスト",
+      "priority": 10,
+      "setting": {
+        "general_keywords": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "通常のテキスト",
+          "type": "option"
+        },
+        "general_analytics_code": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "テキストエリア",
+          "type": "textarea"
+        },
+        "general_user_select": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "テキストエディター",
+          "type": "text-editor"
+        }
+      }
+    },
+    "picker_settings": {
+      "title": "ピッカー",
+      "priority": 30,
+      "setting": {
+        "colorpicker": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "カラーピッカー",
+          "type": "color",
+          "output":{
+            ".logo": "background-color"
+          }
+        },
+        "image": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "メディア",
+          "type": "image"
+        },
+        "layout": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "レイアウト",
+          "type": "layout-picker"
+        },
+        "date": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "日付",
+          "type": "date-picker"
+        }
+      }
+    },
+    "select_settings": {
+      "title": "セレクトボックス",
+      "priority": 30,
+      "setting": {
+        "category": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "カテゴリー",
+          "type": "category-dropdown"
+        },
+        "google_font": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "Google Font",
+          "type": "google-font"
+        },
+        "menu_dropdown": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "メニュー選択",
+          "type": "menu-dropdown"
+        },
+        "post_dropdown": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "投稿選択",
+          "type": "post-dropdown"
+        },
+        "post_type_dropdown": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "投稿選択",
+          "type": "post-type-dropdown"
+        },
+        "taxonomy_dropdown": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "投稿タイプ",
+          "type": "taxonomy-dropdownn"
+        },
+        "user_dropdown": {
+          "transport": "postMessage",
+          "default": "",
+          "label": "ユーザー",
+          "type": "user-dropdown"
+        }
+      }
+    }
+  }
 }
